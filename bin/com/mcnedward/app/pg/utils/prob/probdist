@@ -1,0 +1,5 @@
+
+Uniform = com.mcnedward.app.pg.utils.prob.UniformDistribution
+UniformInt = com.mcnedward.app.pg.utils.prob.UniformIntDistribution
+Normal = com.mcnedward.app.pg.utils.prob.NormalDistribution
+Round = com.mcnedward.app.pg.utils.prob.RoundDistribution

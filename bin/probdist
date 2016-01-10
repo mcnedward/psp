@@ -1,0 +1,5 @@
+
+Uniform = pfc.util.prob.UniformDistribution
+UniformInt = pfc.util.prob.UniformIntDistribution
+Normal = pfc.util.prob.NormalDistribution
+Round = pfc.util.prob.RoundDistribution
