@@ -1,8 +1,8 @@
 package com.mcnedward.app;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 import java.util.Random;
 
 import com.mcnedward.app.pg.ingsw.ProblemGenerator;
@@ -21,7 +21,6 @@ public class PSPMain {
 	private List<Graph> graphs;
 
 	private float totalDaysToComplete;
-	private float totalHoursToComplete;
 
 	private float totalCost;
 
@@ -30,27 +29,27 @@ public class PSPMain {
 		tasks = new ArrayList<>();
 		graphs = new ArrayList<>();
 		
-		File file = createFile();
+		Properties file = createFile();
 		
 		parse(file);
 		
 		evaluate();
 	}
 	
-	public static File createFile() {
+	public static Properties createFile() {
 		Random random = new Random();
 		String outputFileName = RESOURCE_DIRECTORY + OUTPUT_FILE_PREFIX + random.nextInt() + ".txt";
-		File outputFile = new File(outputFileName);
+		Properties prop = null;
 		try {
 			String[] parameters = new String[] { RESOURCE_DIRECTORY + RESOURCE_FILE, outputFileName };
-			new ProblemGenerator().main(parameters);
+			prop = new ProblemGenerator().main(parameters);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return outputFile;
+		return prop;
 	}
 	
-	public void parse(File file) {
+	public void parse(Properties file) {
 		Parser parser = new Parser(file);
 		parser.parseFile();
 
@@ -71,14 +70,13 @@ public class PSPMain {
 
 		calculateTasks();
 
-		System.out.printf("Total Hours: %s\nTotal Days: %s\nTotal Cost: %s\n", totalHoursToComplete, totalDaysToComplete,
-				totalCost);
-		
-		System.out.println("Fitness: " + calculateFeasibleFitness());
+//		System.out.printf("Total Hours: %s\nTotal Days: %s\nTotal Cost: %s\n", totalHoursToComplete, totalDaysToComplete,
+//				totalCost);
+//		
+//		System.out.println("Fitness: " + calculateFeasibleFitness());
 	}
 	
 	public void calculateTasks() {
-		float totalHours = 0f;
 		float totalDays = 0f;
 		float projectCost = 0f;
 		for (Task task : tasks) {
@@ -94,14 +92,11 @@ public class PSPMain {
 				float daysToComplete = dedication / task.getEffort();
 				totalDays += daysToComplete;
 				float hoursToComplete = daysToComplete * 8;
-				totalHours += hoursToComplete;
 				task.setDaysToComplete(daysToComplete);
 				task.setHoursToComlete(hoursToComplete);
-				System.out.printf("Time to complete task: %s work days or %s hours\n", daysToComplete, hoursToComplete);
 			}
 		}
 		totalDaysToComplete = totalDays;
-		totalHoursToComplete = totalHours;
 		totalCost = projectCost;
 	}
 
@@ -152,8 +147,4 @@ public class PSPMain {
 		return null;
 	}
 	
-	public static void main(String[] args) {
-		PSPMain p = new PSPMain();
-	}
-
 }

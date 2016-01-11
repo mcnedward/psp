@@ -1,7 +1,6 @@
 package com.mcnedward.app.pg.utils.prob;
 
 import java.util.Properties;
-import java.util.Random;
 
 public final class NormalDistribution
   extends ProbabilityDistribution

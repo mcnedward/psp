@@ -1,7 +1,6 @@
 package com.mcnedward.app.pg.utils;
 
 import java.io.FileInputStream;
-import java.io.PrintStream;
 import java.util.Enumeration;
 import java.util.Properties;
 
@@ -10,7 +9,8 @@ public abstract class PropUtils
   public static final char LABEL_RIGHT_DELIMITER = '>';
   public static final char LABEL_LEFT_DELIMITER = '<';
   
-  public static Properties getPropertiesWithPrefix(Properties paramProperties, String paramString)
+  @SuppressWarnings("rawtypes")
+public static Properties getPropertiesWithPrefix(Properties paramProperties, String paramString)
   {
     Properties localProperties = new Properties();
     
@@ -24,7 +24,8 @@ public abstract class PropUtils
     }
     return localProperties;
   }
-  
+
+  @SuppressWarnings("rawtypes")
   public static Properties putPrefixToProperties(String paramString, Properties paramProperties)
   {
     Properties localProperties = new Properties();
@@ -38,7 +39,8 @@ public abstract class PropUtils
     }
     return localProperties;
   }
-  
+
+  @SuppressWarnings("rawtypes")
   public static Properties substituteLabels(Properties paramProperties1, Properties paramProperties2)
   {
     Properties localProperties1 = new Properties();

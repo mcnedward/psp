@@ -9,11 +9,16 @@ import java.util.Properties;
 
 public class Factory
 {
-  private Hashtable ht;
+@SuppressWarnings("rawtypes")
+private Hashtable ht;
+@SuppressWarnings("rawtypes")
   private Class superclass;
+  @SuppressWarnings("rawtypes")
   private Class[] constructor_param;
-  private String registry;
-  
+@SuppressWarnings("unused")
+private String registry;
+
+@SuppressWarnings("rawtypes")
   public Factory(Class paramClass, Class[] paramArrayOfClass, String paramString)
   {
     this.superclass = paramClass;
@@ -60,7 +65,8 @@ public class Factory
     }
   }
   
-  private boolean register(String paramString, Class paramClass)
+  @SuppressWarnings({ "rawtypes", "unchecked" })
+private boolean register(String paramString, Class paramClass)
   {
     if (!this.superclass.isAssignableFrom(paramClass)) {
       return false;
@@ -80,15 +86,18 @@ public class Factory
     
     return true;
   }
-  
+
+  @SuppressWarnings("unchecked")
   public Object createObject(String paramString, Object[] paramArrayOfObject)
   {
+	  @SuppressWarnings("rawtypes")
     Class localClass = (Class)this.ht.get(paramString);
     if (localClass == null) {
       return null;
     }
     try
     {
+    	@SuppressWarnings("rawtypes")
       Constructor localConstructor = localClass.getConstructor(this.constructor_param);
       
       return localConstructor.newInstance(paramArrayOfObject);
